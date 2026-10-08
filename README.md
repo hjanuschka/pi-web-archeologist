@@ -8,12 +8,17 @@ into a single slash command.
 
 Registers `/ask_spec_archeologist <question | spec URL | #fragment>`.
 
-On first use in a session it injects the "Web Standards Archeologist"
-chain-of-evidence protocol (cross-spec discovery via ReSpec Xref/WebDex/MDN,
-spec repo mapping, `<dfn>` locating heuristics, `git log -L` deep blame,
-Bugzilla/SVN/IRC link extraction, spec call graphs) together with your
-question, and triggers a turn. Subsequent calls only send the question
+On first use in a session it loads the "Web Standards Archeologist"
+protocol straight from
+[noamr/web-archeologist](https://github.com/noamr/web-archeologist)
+(`skills/web-archeologist/SKILL.md`) and injects it together with your
+question, then triggers a turn. Subsequent calls only send the question
 and reference the already-injected protocol.
+
+The upstream SKILL.md is cached in `~/.pi/cache/web-archeologist/` and
+refreshed when older than 24h; offline use falls back to the cached copy.
+The only adaptation applied is stripping the front-matter and rewriting
+the Gemini cache path (`~/.gemini/cache` -> `~/.pi/cache`).
 
 No tools, no skill - just context injection when you need it, e.g. while
 working on a spec PR:
@@ -38,4 +43,4 @@ Or add to `~/.pi/agent/settings.json`:
 }
 ```
 
-Spec clones are cached in `~/.pi/cache/specs`.
+Spec clones made by the protocol are cached in `~/.pi/cache/specs`.
