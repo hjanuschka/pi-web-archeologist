@@ -8,17 +8,20 @@ into a single slash command.
 
 Registers `/ask_spec_archeologist <question | spec URL | #fragment>`.
 
-On first use in a session it loads the "Web Standards Archeologist"
-protocol straight from
+On first use in a session it clones the full
 [noamr/web-archeologist](https://github.com/noamr/web-archeologist)
-(`skills/web-archeologist/SKILL.md`) and injects it together with your
-question, then triggers a turn. Subsequent calls only send the question
-and reference the already-injected protocol.
+repository into `~/.pi/cache/web-archeologist/repo` (pulled again when
+older than 24h, offline falls back to the existing checkout) and injects:
 
-The upstream SKILL.md is cached in `~/.pi/cache/web-archeologist/` and
-refreshed when older than 24h; offline use falls back to the cached copy.
-The only adaptation applied is stripping the front-matter and rewriting
-the Gemini cache path (`~/.gemini/cache` -> `~/.pi/cache`).
+- the `skills/web-archeologist/SKILL.md` protocol (front-matter stripped,
+  `~/.gemini/cache` rewritten to `~/.pi/cache`)
+- an index of the repo's other skills and helper scripts with local
+  absolute paths (html-spec-review checks for algorithms/WebIDL/WPT
+  coverage, html-spec-splitter), so the agent can read and run them
+- your question
+
+then triggers a turn. Subsequent calls only send the question and
+reference the already-injected protocol.
 
 No tools, no skill - just context injection when you need it, e.g. while
 working on a spec PR:
