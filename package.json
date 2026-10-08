@@ -1,0 +1,9 @@
+{
+  "name": "pi-web-archeologist",
+  "version": "0.1.0",
+  "description": "pi extension: /ask_spec_archeologist - trace web spec prose back to its historical origins (adapted from noamr/web-archeologist)",
+  "license": "MIT",
+  "pi": {
+    "extensions": ["./index.ts"]
+  }
+}
